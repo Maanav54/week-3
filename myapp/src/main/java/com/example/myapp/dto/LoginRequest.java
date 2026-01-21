@@ -3,7 +3,7 @@ package com.example.myapp.dto;
 import lombok.Data;
 
 @Data
-public class LoginData {
+public class LoginRequest {
     private String email;
     private String password;
 }
