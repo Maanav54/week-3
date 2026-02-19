@@ -1,6 +1,9 @@
 package com.example.myapp.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -11,11 +14,13 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import java.util.*;
 
 import com.example.myapp.dto.LoginRequest;
 import com.example.myapp.dto.SignupRequest;
+import com.example.myapp.dto.PageResponse;
 import com.example.myapp.model.User;
 import com.example.myapp.repo.UserRepository;
 import com.example.myapp.security.JwtService;
@@ -71,10 +76,7 @@ public class Authentication {
 
         return db.findAll();
     }
-
   
-
-   
     @PutMapping("/user/{id}")
     public Map<Object, Object> updateUser(
             @PathVariable Long id,

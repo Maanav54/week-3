@@ -14,7 +14,7 @@ import java.security.Key;
 @Service
 public class JwtService {
     private final String secret = System.getProperty("JWT_SECRET", "change-this-secret-change-this-secret-1234567890");
-    private final long expirationMs = 3600 * 1000; // 1 hour expiration
+    private final long expirationMs = 300 * 100; // 1 hour expiration
 
     public String generateToken(String subject) {
         Date now = new Date();

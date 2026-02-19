@@ -61,6 +61,43 @@ const Admin = () => {
     }
   }, [navigate]);
 
+  const deleteUser = async (id) => {
+    if (!window.confirm("Are you sure you want to delete this user?")) return;
+
+    const token = localStorage.getItem("token");
+    if (!token) {
+      logout();
+      return;
+    }
+
+    try {
+      const res = await fetch(`http://localhost:4040/api/user/${id}`, {
+        method: "DELETE",
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+
+      if (res.status === 401 || res.status === 403) {
+        logout();
+        return;
+      }
+
+      const data = await res.json();
+      if (!res.ok) {
+        alert(data.msg || "Failed to delete user");
+        return;
+      }
+
+      alert("User deleted successfully!");
+      // Refresh list
+      fetchUsers();
+    } catch (err) {
+      console.error("Delete error:", err);
+      alert("Error deleting user");
+    }
+  };
+
   // Optional: keep page protected (redirect if token missing)
   useEffect(() => {
     const token = localStorage.getItem("token");
@@ -146,6 +183,7 @@ const Admin = () => {
                     <th className="px-4 py-3 font-semibold">ID</th>
                     <th className="px-4 py-3 font-semibold">Name</th>
                     <th className="px-4 py-3 font-semibold">Email</th>
+                    <th className="px-4 py-3 font-semibold">Actions</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -162,6 +200,20 @@ const Admin = () => {
                       </td>
                       <td className="px-4 py-3 text-slate-700">
                         {u.email ?? "-"}
+                      </td>
+                      <td className="px-4 py-3 text-slate-700 flex gap-2">
+                        <button
+                          onClick={() => navigate(`/update/${u.id}`)}
+                          className="rounded-lg bg-yellow-500 px-3 py-1.5 text-xs font-semibold text-white shadow-sm hover:bg-yellow-600 transition-colors"
+                        >
+                          Update
+                        </button>
+                        <button
+                          onClick={() => deleteUser(u.id)}
+                          className="rounded-lg bg-red-500 px-3 py-1.5 text-xs font-semibold text-white shadow-sm hover:bg-red-600 transition-colors"
+                        >
+                          Delete
+                        </button>
                       </td>
                     </tr>
                   ))}

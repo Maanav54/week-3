@@ -24,8 +24,6 @@ public class JwtAuthFilter extends OncePerRequestFilter {
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
             throws ServletException, IOException {
         
-        // Remove hardcoded path checks. Let SecurityConfig handle permission.
-        
         String authHeader = request.getHeader(HttpHeaders.AUTHORIZATION);
         if (authHeader != null && authHeader.startsWith("Bearer ")) {
             String token = authHeader.substring(7);
@@ -33,16 +31,13 @@ public class JwtAuthFilter extends OncePerRequestFilter {
                 if (jwtService.validateToken(token)) {
                     String username = jwtService.extractUsername(token);
                     if (username != null && SecurityContextHolder.getContext().getAuthentication() == null) {
-                        // Create authentication token (consider loading roles/authorities if needed in future)
                         UsernamePasswordAuthenticationToken authToken = new UsernamePasswordAuthenticationToken(
-                                username, null, null); // Roles are null for now
+                                username, null, null);
                         authToken.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
                         SecurityContextHolder.getContext().setAuthentication(authToken);
                     }
                 }
             } catch (Exception e) {
-                // Log token validation error but don't fail the request immediately; 
-                // let Spring Security handle 401/403 if authentication is missing.
                 System.out.println("Token validation failed: " + e.getMessage());
             }
         }

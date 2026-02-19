@@ -16,8 +16,9 @@ import com.example.myapp.repo.UserRepository;
 @RestController
 public class Index {
     @GetMapping("/")
-    R m() {
-        return new R();
+    ResponseEntity<?> m() {
+        // return new R();
+        return  ResponseEntity.status(HttpStatus.NOT_FOUND).body(new R());    
     }
     
 
