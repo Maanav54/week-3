@@ -16,13 +16,13 @@ import com.example.myapp.repo.UserRepository;
 
 @CrossOrigin(origins = "*")
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/api/users")
 public class PaginationController {
 
     @Autowired
     private UserRepository db;
 
-    @GetMapping("/users/page")
+    @GetMapping("/page")
     public PageResponse<User> getUsersPage(
             @RequestParam(defaultValue = "0") int page,
             @RequestParam(defaultValue = "5") int size) {

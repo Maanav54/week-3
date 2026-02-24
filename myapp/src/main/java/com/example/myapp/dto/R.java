@@ -7,5 +7,5 @@ public class R {
     public String msg = "welcom spring backend";
     public String sucess = "true";
     public String status = "200 ok";
-    public String game="https://archive.org/details/family-crisis#";
+    
 }
