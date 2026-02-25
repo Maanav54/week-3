@@ -109,13 +109,13 @@ const Admin = () => {
   }, [navigate]);
 
   return (
-    <div className="min-h-screen bg-slate-50 p-4 sm:p-8">
-      <div className="mx-auto max-w-5xl">
+    <div className="min-h-screen p-4 sm:p-8">
+      <div className="mx-auto max-w-5xl page-shell">
         {/* Header */}
         <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
           <div>
-            <h1 className="text-2xl font-bold text-slate-900">Admin Dashboard</h1>
-            <p className="text-sm text-slate-600">Manage and view all registered users.</p>
+            <h1 className="glass-title">Admin Dashboard</h1>
+            <p className="glass-subtle">Manage and view all registered users.</p>
           </div>
 
           {/* Buttons */}
@@ -123,7 +123,7 @@ const Admin = () => {
             <button
               onClick={fetchUsers}
               disabled={loading}
-              className="rounded-xl bg-blue-600 px-4 py-2 text-sm font-semibold text-white shadow-sm hover:bg-blue-700 disabled:cursor-not-allowed disabled:opacity-60"
+              className="glass-btn primary disabled:cursor-not-allowed disabled:opacity-60"
             >
               {loading ? "Fetching..." : fetchedOnce ? "Refresh Users" : "Get Users"}
             </button>
@@ -135,14 +135,14 @@ const Admin = () => {
                 setFetchedOnce(false);
               }}
               disabled={loading}
-              className="rounded-xl bg-white px-4 py-2 text-sm font-semibold text-slate-900 shadow-sm ring-1 ring-slate-200 hover:bg-slate-100 disabled:cursor-not-allowed disabled:opacity-60"
+              className="glass-btn disabled:cursor-not-allowed disabled:opacity-60"
             >
               Clear
             </button>
 
             <button
               onClick={logout}
-              className="rounded-xl bg-slate-900 px-4 py-2 text-sm font-semibold text-white shadow-sm hover:bg-slate-800"
+              className="glass-btn"
             >
               Logout
             </button>
@@ -150,7 +150,7 @@ const Admin = () => {
         </div>
 
         {/* Card */}
-        <div className="mt-6 rounded-2xl bg-white p-4 sm:p-6 shadow-sm ring-1 ring-slate-200">
+        <div className="mt-6 glass-card pad">
           {/* Status */}
           {error && (
             <div className="mb-4 rounded-xl border border-red-200 bg-red-50 p-3 text-sm text-red-700">
@@ -159,17 +159,17 @@ const Admin = () => {
           )}
 
           {!fetchedOnce && !error && (
-            <div className="rounded-xl border border-slate-200 bg-slate-50 p-4 text-sm text-slate-700">
+            <div className="rounded-xl border border-slate-200 bg-white p-4 text-sm text-slate-700" style={{background:'rgba(255,255,255,0.6)'}}>
               Click <span className="font-semibold">Get Users</span> to load data.
             </div>
           )}
 
           {loading && (
-            <div className="mt-4 text-sm text-slate-600">Loading users...</div>
+            <div className="mt-4 text-sm text-slate-600 glass-muted">Loading users...</div>
           )}
 
           {!loading && fetchedOnce && !error && users.length === 0 && (
-            <div className="mt-4 rounded-xl border border-slate-200 bg-slate-50 p-4 text-sm text-slate-700">
+            <div className="mt-4 rounded-xl border border-slate-200 bg-white p-4 text-sm text-slate-700" style={{background:'rgba(255,255,255,0.6)'}}>
               No users found.
             </div>
           )}
@@ -177,9 +177,9 @@ const Admin = () => {
           {/* Table */}
           {!loading && users.length > 0 && (
             <div className="mt-4 overflow-x-auto">
-              <table className="w-full border-collapse text-left text-sm">
+              <table className="glass-table text-left text-sm">
                 <thead>
-                  <tr className="bg-slate-50 text-slate-700">
+                  <tr>
                     <th className="px-4 py-3 font-semibold">ID</th>
                     <th className="px-4 py-3 font-semibold">Name</th>
                     <th className="px-4 py-3 font-semibold">Email</th>
@@ -190,7 +190,7 @@ const Admin = () => {
                   {users.map((u, idx) => (
                     <tr
                       key={u.id ?? u._id ?? idx}
-                      className="border-t hover:bg-slate-50"
+                      className=""
                     >
                       <td className="px-4 py-3 text-slate-700">
                         {u.id ?? u._id ?? "-"}
@@ -204,13 +204,13 @@ const Admin = () => {
                       <td className="px-4 py-3 text-slate-700 flex gap-2">
                         <button
                           onClick={() => navigate(`/update/${u.id}`)}
-                          className="rounded-lg bg-yellow-500 px-3 py-1.5 text-xs font-semibold text-white shadow-sm hover:bg-yellow-600 transition-colors"
+                          className="glass-btn"
                         >
                           Update
                         </button>
                         <button
                           onClick={() => deleteUser(u.id)}
-                          className="rounded-lg bg-red-500 px-3 py-1.5 text-xs font-semibold text-white shadow-sm hover:bg-red-600 transition-colors"
+                          className="glass-btn"
                         >
                           Delete
                         </button>
@@ -220,7 +220,7 @@ const Admin = () => {
                 </tbody>
               </table>
 
-              <p className="mt-3 text-xs text-slate-500">
+              <p className="mt-3 text-xs glass-muted">
                 Total users: <span className="font-semibold">{users.length}</span>
               </p>
             </div>

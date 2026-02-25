@@ -48,26 +48,31 @@ function Login() {
   }
 
   return (
-    <div>
-      <h3>Login</h3>
-
-      <input
-        type="email"
-        placeholder="email"
-        value={l.email}
-        onChange={(e) => setL({ ...l, email: e.target.value })}
-      />
-      <br />
-
-      <input
-        type="password"
-        placeholder="password"
-        value={l.password}
-        onChange={(e) => setL({ ...l, password: e.target.value })}
-      />
-      <br /><br />
-
-      <button onClick={submitHandler}>Submit</button>
+    <div className="stack-center">
+      <div className="glass-card pad" style={{ width: 360, maxWidth: '92vw' }}>
+        <h3 className="glass-title">Login</h3>
+        <p className="glass-subtle">Enter your credentials to continue</p>
+        <div style={{ height: 12 }} />
+        <input
+          className="glass-input"
+          type="email"
+          placeholder="Email"
+          value={l.email}
+          onChange={(e) => setL({ ...l, email: e.target.value })}
+        />
+        <div style={{ height: 12 }} />
+        <input
+          className="glass-input"
+          type="password"
+          placeholder="Password"
+          value={l.password}
+          onChange={(e) => setL({ ...l, password: e.target.value })}
+        />
+        <div style={{ height: 16 }} />
+        <div className="glass-row">
+          <button className="glass-btn primary" onClick={submitHandler}>Sign in</button>
+        </div>
+      </div>
     </div>
   );
 }

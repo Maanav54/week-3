@@ -52,47 +52,50 @@ function UpdateUser() {
   };
 
   return (
-    <div style={{ padding: "20px" }}>
-      <h2>Update User (ID: {id})</h2>
-      <form onSubmit={handleSubmit}>
-        <div>
-          <label>Name:</label>
-          <br />
-          <input
-            type="text"
-            name="name"
-            value={user.name}
-            onChange={handleChange}
-            required
-          />
-        </div>
-        <br />
-        <div>
-          <label>Email:</label>
-          <br />
-          <input
-            type="email"
-            name="email"
-            value={user.email}
-            onChange={handleChange}
-            required
-          />
-        </div>
-        <br />
-        <div>
-          <label>Password:</label>
-          <br />
-          <input
-            type="text"
-            name="password"
-            value={user.password}
-            onChange={handleChange}
-            required
-          />
-        </div>
-        <br />
-        <button type="submit">Update</button>
-      </form>
+    <div className="stack-center">
+      <div className="glass-card pad" style={{ width: 420, maxWidth: '92vw' }}>
+        <h2 className="glass-title">Update User (ID: {id})</h2>
+        <div style={{ height: 12 }} />
+        <form onSubmit={handleSubmit}>
+          <div>
+            <input
+              className="glass-input"
+              type="text"
+              name="name"
+              placeholder="Name"
+              value={user.name}
+              onChange={handleChange}
+              required
+            />
+          </div>
+          <div style={{ height: 12 }} />
+          <div>
+            <input
+              className="glass-input"
+              type="email"
+              name="email"
+              placeholder="Email"
+              value={user.email}
+              onChange={handleChange}
+              required
+            />
+          </div>
+          <div style={{ height: 12 }} />
+          <div>
+            <input
+              className="glass-input"
+              type="text"
+              name="password"
+              placeholder="Password"
+              value={user.password}
+              onChange={handleChange}
+              required
+            />
+          </div>
+          <div style={{ height: 16 }} />
+          <button className="glass-btn primary" type="submit">Update</button>
+        </form>
+      </div>
     </div>
   );
 }

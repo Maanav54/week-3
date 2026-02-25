@@ -1,14 +1,7 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 
 function Use() {
-  let [f, setF] = useState("🍏");
-  useEffect(() => {
-    if (f == "🍏") {
-      setF("🍎");
-    } else {
-      setF("🍏");
-    }
-  },[]);
+  let [f] = useState("🍎");
   return <h1>fruit : {f}</h1>;
 }
 
