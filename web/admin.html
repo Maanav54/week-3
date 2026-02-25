@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <center>
+      <h1>Admin</h1>
+      <br>
+      <button onclick="users()">click</button>
+      <br>
+      <br>
+      <div>
+        <span id="output"></span>
+      </div>
+    </center>
+    <script>
+      async function users() {
+        let res = await fetch("http://40.0.20.123:4040/api/users");
+        let data = await res.json();
+        console.log(data);
+        document.getElementById("output").innerText=JSON.stringify(data);
+      }
+    </script>
+  </body>
+</html>
